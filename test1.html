@@ -3,23 +3,16 @@
 <script src="https://jeromeetienne.github.io/AR.js/aframe/build/aframe-ar.js"></script>
 <body style='margin: 0px; overflow: hidden;'>
   <a-scene embedded arjs>
-    <!-- Marker for torus knot -->
-    <a-marker type="pattern" url="pattern-marker.patt">
-      <a-entity id="torusKnot" geometry="primitive: torusKnot; radius: 0.25; radiusTubular: 0.05;" material='opacity: 1.0' color="green" position='0 0.5 0' rotation="0 0 0">
-      </a-entity>
-      <a-text value="Made by Rakshyen" color="white" align="center" position="0 1.5 0"></a-text>
-    </a-marker>
-
-    <!-- Marker for cube -->
-    <a-marker type="pattern" url="custom-marker.patt">
-      <a-box position="0 0.5 0" material="color: red;"></a-box>
-    </a-marker>
- 
+    <!-- create your content here. A torus knot instead of a box -->
+    <a-entity id="torusKnot" geometry="primitive: torusKnot; radius: 1; radiusTubular: 0.2;" material="color: blue;"
+              position='0 0.5 0' rotation="0 0 0">
+    </a-entity>
     <!-- define a camera which will move according to the marker position -->
     <a-marker-camera preset='hiro'></a-marker-camera>
   </a-scene>
 
   <script>
+    // JavaScript code to animate the torus knot
     var torusKnot = document.getElementById("torusKnot");
     var angle = 0;
 
