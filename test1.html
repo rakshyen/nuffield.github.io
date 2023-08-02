@@ -4,8 +4,9 @@
 <body style='margin: 0px; overflow: hidden;'>
   <a-scene embedded arjs>
     <!-- create your content here. A torus knot instead of a box -->
-    <a-entity id="torusKnot" geometry="primitive: torusKnot; radius: 0.25; radiusTubular: 0.05;" src = "pattern.jpeg"
+    <a-entity id="torusKnot" geometry="primitive: torusKnot; radius: 0.25; radiusTubular: 0.05;" src = "pattern.jpg"
               position='0 0.5 0' rotation="0 0 0">
+      <a-text value="Made by Rakshyen" color="white" align="center" position="0 1.5 0"></a-text>
     </a-entity>
     <!-- define a camera which will move according to the marker position -->
     <a-marker-camera preset='hiro'></a-marker-camera>
