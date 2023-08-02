@@ -14,16 +14,22 @@
   <script>
     // JavaScript code to animate the torus knot
     var torusKnot = document.getElementById("torusKnot");
-    torusKnot.addEventListener("loaded", function () {
-      torusKnot.setAttribute("animation", {
-        property: "rotation",
-        to: "0 360 0",
-        loop: true,
-        dur: 5000
-      });
-    });
+    var angle = 0;
+
+    function animateRotation() {
+      angle += 1;
+      torusKnot.setAttribute("rotation", "0 " + angle + " 0");
+    }
+
+    setInterval(animateRotation, 16); // 16ms ~ 60fps
   </script>
 </body>
+
+
+
+
+
+
 
 
 
