@@ -6,12 +6,26 @@
     <a-marker preset="hiro">
       <!-- Unique Experience: Floating Particle System -->
      <a-entity
-        geometry="primitive: box"
-        material="color: red; roughness: 0.5; metalness: 0.7"
-        animation__rotation="property: rotation; to: 0 360 0; loop: true; dur: 3000"
-        scale="0.2 0.2 0.2"
+        <a-entity id="bouncingSphere" geometry="primitive: sphere; radius: 0.1" material="color: purple;"></a-entity>
       ></a-entity>
     </a-marker>
     <a-entity camera></a-entity>
   </a-scene>
+    <script>
+    // JavaScript code for custom animation
+    var bouncingSphere = document.getElementById("bouncingSphere");
+    var angle = 0;
+    var amplitude = 0.2; // Bouncing amplitude
+    var frequency = 0.02; // Bouncing frequency
+
+    function animateBouncing() {
+      angle += frequency;
+      var yPosition = amplitude * Math.sin(angle);
+      bouncingSphere.setAttribute("position", "0 " + yPosition + " 0");
+      bouncingSphere.setAttribute("rotation", angle * 100 + " 0 0");
+      requestAnimationFrame(animateBouncing);
+    }
+
+    animateBouncing(); // Start the animation loop
+  </script>
 </body>
