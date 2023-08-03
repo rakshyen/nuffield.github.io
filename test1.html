@@ -1,8 +1,12 @@
 <script src="https://aframe.io/releases/0.6.0/aframe.min.js"></script>
 <!-- include ar.js for A-Frame -->
 <script src="https://jeromeetienne.github.io/AR.js/aframe/build/aframe-ar.js"></script>
+<script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+<script src="https://raw.githack.com/AR-js-org/studio-backend/master/src/modules/marker/tools/gesture-detector.js"></script>
+<script src="https://raw.githack.com/AR-js-org/studio-backend/master/src/modules/marker/tools/gesture-handler.js"></script>
 <body style='margin: 0px; overflow: hidden;'>
   <a-scene embedded arjs='sourceType: webcam;'>
+   
 
   <a-marker preset='hiro'>
        <a-entity id="torusKnot" geometry="primitive: torusKnot; radius: 0.25; radiusTubular: 0.05;" material="color: blue;"
@@ -12,18 +16,31 @@
     </a-marker>
 
     
-    <a-marker preset='kanji'>
-    <a-assets>
+   <!--   <a-marker preset='kanji'>
+  <a-assets>
   <a-asset-item id="scene" src="/scene.gltf"></a-asset-item>
-</a-assets>
-<!-- use your gltf model -->
+</a-assets> -->
+<!-- use your gltf model
 <a-entity gltf-model="##scene"></a-entity>
-</a-marker>
+</a-marker> -->
 
-  <a-marker type='pattern' preset ='custom' url='pattern-marker.patt'>
-     <a-box position='0 0.5 0' material='opacity: 0.5;'></a-box>
-        <a-text value="Made by Rakshyen" color="white" align="center" position="0 1.5 0"></a-text>
-    </a-marker>
+ <a-marker
+                id="animated-marker"
+                type="pattern"
+                preset="custom"
+                url="marker.patt"
+                raycaster="objects: .clickable"
+                emitevents="true"
+                cursor="fuse: false; rayOrigin: mouse;"
+            >
+                <a-image
+                    src="asset.jpeg"
+                    scale="1 1 1"
+                    class="clickable"
+                    rotation="-90 0 0"
+                    gesture-handler
+                ></a-image>
+            </a-marker>
     
     <a-entity camera></a-entity>
   </a-scene>
