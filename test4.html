@@ -6,26 +6,61 @@
     <a-marker preset="hiro">
       <!-- Unique Experience: Floating Particle System -->
      <a-entity
-        <a-entity id="bouncingSphere" geometry="primitive: sphere; radius: 0.1" material="color: purple;"></a-entity>
+        id="cube"
+        geometry="primitive: box"
+        material="color: #ff0000; emissive: #ff8888;"
+        scale="0.2 0.2 0.2"
       ></a-entity>
     </a-marker>
     <a-entity camera></a-entity>
   </a-scene>
-    <script>
-    // JavaScript code for custom animation
-    var bouncingSphere = document.getElementById("bouncingSphere");
-    var angle = 0;
-    var amplitude = 0.2; // Bouncing amplitude
-    var frequency = 0.02; // Bouncing frequency
 
-    function animateBouncing() {
+  <script>
+    // JavaScript code for custom animation
+    var cube = document.getElementById("cube");
+    var angle = 0;
+    var amplitude = 0.1; // Pulsating amplitude
+    var frequency = 0.5; // Pulsating frequency
+    var laserBeams = cube.querySelectorAll("a-cylinder");
+
+    function animateCube() {
+      // Update cube pulsation
+      var scale = 1 + amplitude * Math.sin(angle);
+      cube.setAttribute("scale", scale + " " + scale + " " + scale);
+
+      // Update cube rotation
+      cube.setAttribute("rotation", angle * 100 + " " + angle * 100 + " " + angle * 100);
+
       angle += frequency;
-      var yPosition = amplitude * Math.sin(angle);
-      bouncingSphere.setAttribute("position", "0 " + yPosition + " 0");
-      bouncingSphere.setAttribute("rotation", angle * 100 + " 0 0");
-      requestAnimationFrame(animateBouncing);
+
+      // Request the next animation frame
+      requestAnimationFrame(animateCube);
     }
 
-    animateBouncing(); // Start the animation loop
+    function animateLaserBeams() {
+      // Update laser beams animation
+      for (var i = 0; i < laserBeams.length; i++) {
+        var laser = laserBeams[i];
+        laser.setAttribute("scale", "1 1 1");
+        laser.emit("shoot");
+      }
+
+      // Request the next animation frame
+      setTimeout(animateLaserBeams, 2000);
+    }
+
+    animateCube(); // Start the cube animation loop
+    animateLaserBeams(); // Start the laser beams animation loop
   </script>
+
+  <!-- Custom animation for laser beams -->
+  <a-animation
+    attribute="scale"
+    dur="1000"
+    to="0 0 0"
+    begin="shoot"
+    fill="both"
+    repeat="1"
+    easing="ease-in"
+  ></a-animation>
 </body>
