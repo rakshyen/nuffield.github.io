@@ -4,45 +4,25 @@
 <body style="margin: 0px; overflow: hidden;">
   <a-scene embedded arjs="sourceType: webcam;">
     <a-marker preset="hiro">
-      <a-entity id="ball" geometry="primitive: sphere; radius: 0.1" material="color: #00ff00;"></a-entity>
-      <a-entity id="cube" geometry="primitive: box; width: 0.1; height: 0.1; depth: 0.1" material="color: #ff0000;"></a-entity>
+      <a-entity id="bouncingSphere" geometry="primitive: sphere; radius: 0.1" material="color: purple;"></a-entity>
     </a-marker>
     <a-entity camera></a-entity>
   </a-scene>
+ <script>
+    // JavaScript code for custom animation
+    var bouncingSphere = document.getElementById("bouncingSphere");
+    var angle = 0;
+    var amplitude = 0.2; // Bouncing amplitude
+    var frequency = 0.02; // Bouncing frequency
 
-  <script>
-    // JavaScript code for cool bouncing ball animation with rotating cube
-    var ball = document.getElementById("ball");
-    var cube = document.getElementById("cube");
-    var ballAngle = 0;
-    var ballAmplitude = 0.1; // Bouncing amplitude
-    var ballFrequency = 0.1; // Bouncing frequency
-    var cubeAngle = 0;
-    var cubeRotationSpeed = 0.02; // Cube rotation speed
-
-    function animateBouncingBall() {
-      // Update ball bouncing
-      var ballYPosition = ballAmplitude * Math.sin(ballAngle);
-      ball.setAttribute("position", "0 " + ballYPosition + " 0");
-
-      ballAngle += ballFrequency;
-
-      // Request the next animation frame
-      requestAnimationFrame(animateBouncingBall);
+    function animateBouncing() {
+      angle += frequency;
+      var yPosition = amplitude * Math.sin(angle);
+      bouncingSphere.setAttribute("position", "0 " + yPosition + " 0");
+      bouncingSphere.setAttribute("rotation", angle * 100 + " 0 0");
+      requestAnimationFrame(animateBouncing);
     }
 
-    function animateRotatingCube() {
-      // Update cube rotation
-      cube.setAttribute("rotation", cubeAngle + " " + cubeAngle + " " + cubeAngle);
-
-      cubeAngle += cubeRotationSpeed;
-
-      // Request the next animation frame
-      requestAnimationFrame(animateRotatingCube);
-    }
-
-    animateBouncingBall(); // Start the ball bouncing animation loop
-    animateRotatingCube(); // Start the cube rotation animation loop
+    animateBouncing(); // Start the animation loop
   </script>
-</body>
 </body>
