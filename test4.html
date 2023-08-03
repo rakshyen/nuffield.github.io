@@ -4,7 +4,8 @@
 <body style="margin: 0px; overflow: hidden;">
   <a-scene embedded arjs="sourceType: webcam;">
     <a-marker preset="hiro">
-      <a-entity id="bouncingSphere" geometry="primitive: sphere; radius: 0.1" material="color: purple;"></a-entity>
+      <a-entity id="bouncingSphere" geometry="primitive: sphere; radius: 0.3" material="color: purple;"></a-entity>
+      <a-image src="image.jpg" </a-image>
     </a-marker>
     <a-entity camera></a-entity>
   </a-scene>
@@ -12,8 +13,8 @@
     // JavaScript code for custom animation
     var bouncingSphere = document.getElementById("bouncingSphere");
     var angle = 0;
-    var amplitude = 0.2; // Bouncing amplitude
-    var frequency = 0.02; // Bouncing frequency
+    var amplitude = 0.3; // Bouncing amplitude
+    var frequency = 0.01; // Bouncing frequency
 
     function animateBouncing() {
       angle += frequency;
