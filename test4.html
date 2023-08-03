@@ -4,47 +4,45 @@
 <body style="margin: 0px; overflow: hidden;">
   <a-scene embedded arjs="sourceType: webcam;">
     <a-marker preset="hiro">
-          <a-entity id="sphere" geometry="primitive: sphere; radius: 0.1" material="color: #00ff00;"></a-entity>
-      <a-entity id="particleTrail"></a-entity>
+      <a-entity id="ball" geometry="primitive: sphere; radius: 0.1" material="color: #00ff00;"></a-entity>
+      <a-entity id="cube" geometry="primitive: box; width: 0.1; height: 0.1; depth: 0.1" material="color: #ff0000;"></a-entity>
     </a-marker>
     <a-entity camera></a-entity>
   </a-scene>
 
   <script>
-    // JavaScript code for cool bouncing sphere animation with particle trail
-    var sphere = document.getElementById("sphere");
-    var particleTrail = document.getElementById("particleTrail");
-    var angle = 0;
-    var amplitude = 0.1; // Bouncing amplitude
-    var frequency = 0.1; // Bouncing frequency
-    var trailParticles = [];
+    // JavaScript code for cool bouncing ball animation with rotating cube
+    var ball = document.getElementById("ball");
+    var cube = document.getElementById("cube");
+    var ballAngle = 0;
+    var ballAmplitude = 0.1; // Bouncing amplitude
+    var ballFrequency = 0.1; // Bouncing frequency
+    var cubeAngle = 0;
+    var cubeRotationSpeed = 0.02; // Cube rotation speed
 
-    function animateBouncingSphere() {
-      // Update sphere bouncing
-      var yPosition = amplitude * Math.sin(angle);
-      sphere.setAttribute("position", "0 " + yPosition + " 0");
+    function animateBouncingBall() {
+      // Update ball bouncing
+      var ballYPosition = ballAmplitude * Math.sin(ballAngle);
+      ball.setAttribute("position", "0 " + ballYPosition + " 0");
 
-      // Add new trail particle every few frames
-      if (angle % 0.1 === 0) {
-        var particle = document.createElement("a-sphere");
-        particle.setAttribute("radius", "0.005");
-        particle.setAttribute("color", "#00ff00");
-        particle.setAttribute("position", "0 " + yPosition + " 0");
-        particleTrail.appendChild(particle);
-        trailParticles.push(particle);
-
-        // Remove old trail particles to keep it tidy
-        if (trailParticles.length > 10) {
-          particleTrail.removeChild(trailParticles.shift());
-        }
-      }
-
-      angle += frequency;
+      ballAngle += ballFrequency;
 
       // Request the next animation frame
-      requestAnimationFrame(animateBouncingSphere);
+      requestAnimationFrame(animateBouncingBall);
     }
 
-    animateBouncingSphere(); // Start the bouncing animation loop
+    function animateRotatingCube() {
+      // Update cube rotation
+      cube.setAttribute("rotation", cubeAngle + " " + cubeAngle + " " + cubeAngle);
+
+      cubeAngle += cubeRotationSpeed;
+
+      // Request the next animation frame
+      requestAnimationFrame(animateRotatingCube);
+    }
+
+    animateBouncingBall(); // Start the ball bouncing animation loop
+    animateRotatingCube(); // Start the cube rotation animation loop
   </script>
+</body>
 </body>
