@@ -5,7 +5,12 @@
   <a-scene embedded arjs="sourceType: webcam;">
     <a-marker preset="hiro">
       <!-- Unique Experience: Floating Particle System -->
-      <a-entity particle-system="color: #ff8c00, #00ffcc, #ff00ff, #ffff00; particleCount: 150; maxAge: 5; velocityValue: 0.4; velocitySpread: 0.2; accelerationValue: -0.1; accelerationSpread: 0.1; size: 0.05;"></a-entity>
+     <a-entity
+        geometry="primitive: box"
+        material="color: red; roughness: 0.5; metalness: 0.7"
+        animation__rotation="property: rotation; to: 0 360 0; loop: true; dur: 3000"
+        scale="0.2 0.2 0.2"
+      ></a-entity>
     </a-marker>
     <a-entity camera></a-entity>
   </a-scene>
