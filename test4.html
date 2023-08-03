@@ -4,63 +4,47 @@
 <body style="margin: 0px; overflow: hidden;">
   <a-scene embedded arjs="sourceType: webcam;">
     <a-marker preset="hiro">
-      <!-- Unique Experience: Floating Particle System -->
-     <a-entity
-        id="cube"
-        geometry="primitive: box"
-        material="color: #ff0000; emissive: #ff8888;"
-        scale="0.2 0.2 0.2"
-      ></a-entity>
+          <a-entity id="sphere" geometry="primitive: sphere; radius: 0.1" material="color: #00ff00;"></a-entity>
+      <a-entity id="particleTrail"></a-entity>
     </a-marker>
     <a-entity camera></a-entity>
   </a-scene>
 
   <script>
-    // JavaScript code for custom animation
-    var cube = document.getElementById("cube");
+    // JavaScript code for cool bouncing sphere animation with particle trail
+    var sphere = document.getElementById("sphere");
+    var particleTrail = document.getElementById("particleTrail");
     var angle = 0;
-    var amplitude = 0.1; // Pulsating amplitude
-    var frequency = 0.5; // Pulsating frequency
-    var laserBeams = cube.querySelectorAll("a-cylinder");
+    var amplitude = 0.1; // Bouncing amplitude
+    var frequency = 0.1; // Bouncing frequency
+    var trailParticles = [];
 
-    function animateCube() {
-      // Update cube pulsation
-      var scale = 1 + amplitude * Math.sin(angle);
-      cube.setAttribute("scale", scale + " " + scale + " " + scale);
+    function animateBouncingSphere() {
+      // Update sphere bouncing
+      var yPosition = amplitude * Math.sin(angle);
+      sphere.setAttribute("position", "0 " + yPosition + " 0");
 
-      // Update cube rotation
-      cube.setAttribute("rotation", angle * 100 + " " + angle * 100 + " " + angle * 100);
+      // Add new trail particle every few frames
+      if (angle % 0.1 === 0) {
+        var particle = document.createElement("a-sphere");
+        particle.setAttribute("radius", "0.005");
+        particle.setAttribute("color", "#00ff00");
+        particle.setAttribute("position", "0 " + yPosition + " 0");
+        particleTrail.appendChild(particle);
+        trailParticles.push(particle);
+
+        // Remove old trail particles to keep it tidy
+        if (trailParticles.length > 10) {
+          particleTrail.removeChild(trailParticles.shift());
+        }
+      }
 
       angle += frequency;
 
       // Request the next animation frame
-      requestAnimationFrame(animateCube);
+      requestAnimationFrame(animateBouncingSphere);
     }
 
-    function animateLaserBeams() {
-      // Update laser beams animation
-      for (var i = 0; i < laserBeams.length; i++) {
-        var laser = laserBeams[i];
-        laser.setAttribute("scale", "1 1 1");
-        laser.emit("shoot");
-      }
-
-      // Request the next animation frame
-      setTimeout(animateLaserBeams, 2000);
-    }
-
-    animateCube(); // Start the cube animation loop
-    animateLaserBeams(); // Start the laser beams animation loop
+    animateBouncingSphere(); // Start the bouncing animation loop
   </script>
-
-  <!-- Custom animation for laser beams -->
-  <a-animation
-    attribute="scale"
-    dur="1000"
-    to="0 0 0"
-    begin="shoot"
-    fill="both"
-    repeat="1"
-    easing="ease-in"
-  ></a-animation>
 </body>
