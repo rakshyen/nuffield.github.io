@@ -19,10 +19,13 @@
 
     
   <a-marker preset='kanji'>
-  <a-entity gltf-model="url(scene.gltf)"
-          texture="src: url(Electric_Warning_baseColor.png), url(Material.001_baseColor.png), url(Underground_Logo_baseColor.png), url(Underground_Logo_metallicRoughness.png);">
-</a-entity>
-   </a-marker> 
+  <a-entity gltf-model="url(scene.gltf)">
+    <a-entity material="src: url(Electric_Warning_baseColor.png)" gltf-model-opacity="0.7"></a-entity>
+    <a-entity material="src: url(Material.001_baseColor.png)" gltf-model-opacity="0.7"></a-entity>
+    <a-entity material="src: url(Underground_Logo_baseColor.png)" gltf-model-opacity="0.7"></a-entity>
+    <a-entity material="src: url(Underground_Logo_metallicRoughness.png)" gltf-model-opacity="0.7"></a-entity>
+  </a-entity>
+</a-marker>
 
  <a-marker
                 id="animated-marker"
