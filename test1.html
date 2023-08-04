@@ -8,10 +8,8 @@
  <script src="https://cdn.jsdelivr.net/npm/ar.js@2.3.2/aframe/build/aframe-ar.min.js"></script>
 <body style='margin: 0px; overflow: hidden;'>
   <a-scene embedded arjs='sourceType: webcam;'>
-   
 
-  <a-marker preset='hiro'> 
-     
+  <a-marker preset='hiro'>
  <a-entity id="torusKnot" geometry="primitive: torusKnot; radius: 0.25; radiusTubular: 0.05;" material="color: blue;"
               position='0 0.5 0' rotation="0 0 0">
     </a-entity> 
@@ -20,8 +18,7 @@
 
     
   <a-marker preset='kanji'>
-   <a-entity particle-system="color: #ff8c00, #00ffcc, #ff00ff, #ffff00; particleCount: 150; maxAge: 5; velocityValue: 0.4; velocitySpread: 0.2; accelerationValue: -0.1; accelerationSpread: 0.1; size: 0.05;"></a-entity>
-    
+     <a-entity id="bouncingSphere" geometry="primitive: sphere; radius: 0.3" material="color: purple;"></a-entity>
 </a-marker>
 
  <a-marker
@@ -57,4 +54,22 @@
 
     setInterval(animateRotation, 16); // 16ms ~ 60fps
   </script>
+ 
+<script>
+  // JavaScript code for custom animation
+    var bouncingSphere = document.getElementById("bouncingSphere");
+    var angle = 0;
+    var amplitude = 0.5; // Bouncing amplitude
+    var frequency = 0.07; // Bouncing frequency
+
+    function animateBouncing() {
+      angle += frequency;
+      var yPosition = amplitude * Math.sin(angle);
+      bouncingSphere.setAttribute("position", "0 " + yPosition + " 0");
+      bouncingSphere.setAttribute("rotation", angle * 100 + " 0 0");
+      requestAnimationFrame(animateBouncing);
+    }
+
+    animateBouncing(); // Start the animation loop
+ </script>
 </body>
